@@ -40,7 +40,7 @@ jobs:
           key: v1-dependencies-{{ checksum "pom.xml" }}
       - run:
           name: Clean
-          command: mvn -B clean -s settings.xml
+          command: ls -la | mvn -B clean -s settings.xml
       - run:
           name: Compile
           command: mvn -B compile -s settings.xml
@@ -55,5 +55,5 @@ jobs:
           command: sudo mv target/*.war $$CIRCLE_ARTIFACTS/target/application.war
       # run tests!
       - run:
-          name: Integration Test 
+          name: Integration Test
           command: mvn integration-test
