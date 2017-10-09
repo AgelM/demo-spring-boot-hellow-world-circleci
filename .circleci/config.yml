@@ -40,16 +40,16 @@ jobs:
           key: v1-dependencies-{{ checksum "pom.xml" }}
       - run:
           name: Clean
-          command: ls -la | mvn -B clean -s settings.xml
+          command: ls -la | mvn -B clean
       - run:
           name: Compile
-          command: mvn -B compile -s settings.xml
+          command: mvn -B compile
       - run:
           name: Unit test
-          command: mvn -B test -s settings.xml
+          command: mvn -B test
       - run:
           name: Install
-          command: mvn -B install -DskipTests -s settings.xml
+          command: mvn -B install -DskipTests
       - run:
           name: Create artifacts
           command: sudo mv target/*.war $$CIRCLE_ARTIFACTS/target/application.war
