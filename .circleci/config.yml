@@ -38,16 +38,22 @@ jobs:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
-      - run:|
-          - name: Clean
-            command: mvn -B clean -s settings.xml
-          - name: Compile
-            command: mvn -B compile -s settings.xml
-          - name: Unit test
-            command: mvn -B test -s settings.xml
-          - name: Install
-            command: mvn -B install -DskipTests -s settings.xml
-          - name: Create artifacts
-            command: sudo mv target/*.war $$CIRCLE_ARTIFACTS/target/application.war
+      - run:
+          name: Clean
+          command: mvn -B clean -s settings.xml
+      - run:
+          name: Compile
+          command: mvn -B compile -s settings.xml
+      - run:
+          name: Unit test
+          command: mvn -B test -s settings.xml
+      - run:
+          name: Install
+          command: mvn -B install -DskipTests -s settings.xml
+      - run:
+          name: Create artifacts
+          command: sudo mv target/*.war $$CIRCLE_ARTIFACTS/target/application.war
       # run tests!
-      - run: mvn integration-test
+      - run:
+          name: Integration Test 
+          command: mvn integration-test
