@@ -17,7 +17,7 @@ jobs:
       MAVEN_OPTS: -Xmx3200m
     steps:
       - checkout
-      
+
       - setup_remote_docker
       # Download and cache dependencies
       - restore_cache:
@@ -69,7 +69,6 @@ jobs:
             tar -xz -C /tmp -f /tmp/docker-$VER.tgz
             mv /tmp/docker/* /usr/bin
       # run tests!
-      - setup_remote_docker
       - run: docker build -t spring-boot-hello-world .
       - run:
           name: Integration Test
