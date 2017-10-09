@@ -19,7 +19,7 @@ jobs:
     environment:
       # Customize the JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
-
+      working_directory: /
     steps:
       - checkout
 
@@ -52,13 +52,13 @@ jobs:
           command: mvn -B install -DskipTests
       - run:
           name: Create artifacts
-          command: mv target/*.war target/application.war
+          command: mv target/*.war /target/application.war
 
       # run tests!
       - run:
           name: Integration Test
           command: mvn integration-test
-          
+
      - store_artifacts:
-         path: target/application.war
-         destination: /target/application.war
+         path: /target/application.war
+         destination: application.war
