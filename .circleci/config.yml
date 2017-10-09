@@ -76,9 +76,4 @@ jobs:
             docker create -v $PWD -p 8080:8080 --name workdirfiles spring-boot-hello-world /bin/true
             docker cp target/application.war workdirfiles:$PWD
             docker run -p 8080:8080 --name builtapp spring-boot-hello-world
-            docker run --volumes-from workdirfiles -w $PWD --network container:builtapp maven:3.3-jdk-8 cmd mvn -B -Prun-external-tests -D'maven.test.skip=true' -D'external.container.host=workdirfiles' -D'external.container.port=8080' verify
-      - run:
-          name: Integration Test
-          command: |
-            set set -eo pipefail
-            mvn integration-test
+            docker run --volumes-from workdirfiles -w $PWD --network container:builtapp maven:3.3-jdk-8 cmd mvn -B -Prun-external-tests -D'maven.test.skip=true' -D'external.container.host=builtapp' -D'external.container.port=8080'0'erify
