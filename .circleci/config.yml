@@ -41,27 +41,27 @@ jobs:
           key: v1-dependencies-{{ checksum "pom.xml" }}
       - run:
           name: Clean
-          command:|
+          command: |
             set -e
             mvn -B clean
       - run:
           name: Compile
-          command:|
+          command: |
             set -e
             mvn -B compile
       - run:
           name: Unit test
-          command:|
+          command: |
             set -e
             mvn -B test
       - run:
           name: Install
-          command:|
+          command: |
             set -e
             mvn -B install -DskipTests
       - run:
           name: Create artifacts
-          command:|
+          command: |
             set -e
             mv target/*.war target/application.war
 
