@@ -52,7 +52,10 @@ jobs:
           command: mvn -B install -DskipTests
       - run:
           name: Create artifacts
-          command: mv target/*.war $CIRCLE_ARTIFACTS/target/application.war
+          command: mkdir -p artifacts | mv target/*.war artifacts/target/application.war
+     - store_artifacts:
+         path: artifacts/target/application.war
+         destination: /target/application.war
       # run tests!
       - run:
           name: Integration Test
