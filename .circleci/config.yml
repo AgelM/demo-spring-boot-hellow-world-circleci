@@ -53,10 +53,12 @@ jobs:
       - run:
           name: Create artifacts
           command: mv target/*.war target/application.war
-     - store_artifacts:
-         path: target/application.war
-         destination: /target/application.war
+
       # run tests!
       - run:
           name: Integration Test
           command: mvn integration-test
+          
+     - store_artifacts:
+         path: target/application.war
+         destination: /target/application.war
