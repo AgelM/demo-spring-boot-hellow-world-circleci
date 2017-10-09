@@ -68,6 +68,4 @@ jobs:
       # run tests!
       - run:
           name: Integration Test
-          command: |
-            set -e
-            mvn integration-test
+          command: set -e | mvn integration-test
