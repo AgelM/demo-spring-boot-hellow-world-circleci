@@ -15,11 +15,12 @@ jobs:
       # - image: circleci/postgres:9.4
 
     working_directory: /Users/i842164/infra/src/Super-Mario/YaaS-Pipelines/YCD-1109-circleCI
-
+    general:
+      artifacts:
+        - "target/application.jar"
     environment:
       # Customize the JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
-      working_directory: /
     steps:
       - checkout
 
@@ -52,13 +53,9 @@ jobs:
           command: mvn -B install -DskipTests
       - run:
           name: Create artifacts
-          command: mv target/*.war /target/application.war
+          command: mv target/*.war target/application.war
 
       # run tests!
       - run:
           name: Integration Test
           command: mvn integration-test
-
-     - store_artifacts:
-         path: /target/application.war
-         destination: application.war
