@@ -47,7 +47,7 @@ jobs:
           command: |
             set -e
             mvn -B compile
-      - run:
+      - test:
           name: Unit test
           command: |
             set -e
