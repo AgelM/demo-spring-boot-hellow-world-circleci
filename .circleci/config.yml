@@ -57,10 +57,10 @@ jobs:
           command: |
             set -e
             mv target/*.war target/application.war
-            cp target/application.war /${CIRCLE_ARTIFACTS}/application.war
+            cp target/application.war ${CIRCLE_ARTIFACTS}/application.war
 
       - store_artifacts:
-          path: /${CIRCLE_ARTIFACTS}/application.war
+          path: ${CIRCLE_ARTIFACTS}/application.war
           destination: application.jar
 
       - run:
