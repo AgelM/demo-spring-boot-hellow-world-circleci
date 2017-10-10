@@ -62,7 +62,6 @@ jobs:
           command: |
             set -e
             mv target/*.war target/application.war
-            cp target/application.war /mwn/target/application.war
 
       - store_artifacts:
           path: /mwn/target/application.war
