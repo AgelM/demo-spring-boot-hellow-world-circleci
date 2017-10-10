@@ -1,1 +1,1 @@
-# spring-boot-hellow-world-mini
+# spring-boot-hellow-world-circle-ci-demo
