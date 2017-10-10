@@ -12,14 +12,15 @@ jobs:
     docker:
       - image: maven:3.3-jdk-8
 
-    working_directory: /Users/i842164/infra/src/Super-Mario/YaaS-Pipelines/YCD-1109-circleCI
+    working_directory: /tmp
     environment:
       # Customize the JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
     steps:
       - checkout
 
-      - setup_remote_docker
+      - setup_remote_docker:
+          reusable: true
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -61,11 +62,11 @@ jobs:
           command: |
             set -e
             mv target/*.war target/application.war
-            cp target/application.war ${CIRCLE_ARTIFACTS}/application.war
+            cp target/application.war /tmp/target/application.war
 
       - store_artifacts:
-          path: ${CIRCLE_ARTIFACTS}/application.war
-          destination: application.jar
+          path: /tmp/target/application.war
+          destination: /target/application.jar
 
       - run:
           name: Install Docker client
