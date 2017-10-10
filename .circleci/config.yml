@@ -68,12 +68,11 @@ jobs:
             curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
             tar -xz -C /tmp -f /tmp/docker-$VER.tgz
             mv /tmp/docker/* /usr/bin
-      # run tests!
-      - run: docker build -t spring-boot-hello-world .
+            docker build -t spring-boot-hello-world .
       - run:
           name: Integration Test
           command: |
             docker create -v $PWD -p 8080:8080 --name workdirfiles spring-boot-hello-world /bin/true
             docker cp target/application.war workdirfiles:$PWD
-            docker run -d -p 8080:8080 --name builtapp spring-boot-hello-world
-            docker run --volumes-from workdirfiles -w $PWD --network container:builtapp maven:3.3-jdk-8 bash -c "mvn -B -Prun-external-tests -D'maven.test.skip=true' -D'external.container.host=builtapp' -D'external.container.port=8080' verify"
+            docker run -d -w $PWD --volumes-from workdirfiles -p 8080:8080 --name builtapp spring-boot-hello-world
+            docker run --volumes-from workdirfiles -w $PWD --network container:builtapp maven:3.3-jdk-8 bash -c "ls | mvn -X -B -Prun-external-tests -D'maven.test.skip=true' -D'external.container.host=builtapp' -D'external.container.port=8080' verify"
