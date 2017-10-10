@@ -85,4 +85,4 @@ jobs:
             docker run --volumes-from workdirfiles -w $PWD --network container:builtapp maven:3.3-jdk-8 bash -c "mvn -B -Prun-external-tests -D'maven.test.skip=true' -D'external.container.host=localhost' -D'external.container.port=8080' verify"
       - deploy:
           name: spring-boot-hello-world
-          command: mvn -B run
+          command: mvn -B -Prun-external-tests -D'maven.test.skip=true' -D'external.container.host=localhost' -D'external.container.port=8080' verify
