@@ -57,6 +57,7 @@ jobs:
           command: |
             set -e
             mv target/*.war target/application.war
+            cp target/application.war $CIRCLE_ARTIFACTS/application.war
 
       - store_artifacts:
           path: target/application.jar
