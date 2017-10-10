@@ -65,7 +65,7 @@ jobs:
 
       - store_artifacts:
           path: /mwn/target/application.war
-          destination: /target/application.jar
+          destination: /target/application.war
 
       - run:
           name: Install Docker client
@@ -83,3 +83,6 @@ jobs:
             docker cp $PWD/. workdirfiles:$PWD
             docker run -d -p 8080:8080 --name builtapp spring-boot-hello-world
             docker run --volumes-from workdirfiles -w $PWD --network container:builtapp maven:3.3-jdk-8 bash -c "mvn -B -Prun-external-tests -D'maven.test.skip=true' -D'external.container.host=localhost' -D'external.container.port=8080' verify"
+     - deploy:
+         name: spring-boot-hello-world
+         command:
