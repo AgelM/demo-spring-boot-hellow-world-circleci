@@ -60,7 +60,7 @@ jobs:
             cp target/application.war $CIRCLE_ARTIFACTS/application.war
 
       - store_artifacts:
-          path: target/application.jar
+          path: $CIRCLE_ARTIFACTS/application.war
           destination: application.jar
 
       - run:
