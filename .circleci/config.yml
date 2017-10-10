@@ -12,7 +12,7 @@ jobs:
     docker:
       - image: maven:3.3-jdk-8
 
-    working_directory: /tmp
+    working_directory: /mwn
     environment:
       # Customize the JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
@@ -62,10 +62,10 @@ jobs:
           command: |
             set -e
             mv target/*.war target/application.war
-            cp target/application.war /tmp/target/application.war
+            cp target/application.war /mwn/target/application.war
 
       - store_artifacts:
-          path: /tmp/target/application.war
+          path: /mwn/target/application.war
           destination: /target/application.jar
 
       - run:
